@@ -17,10 +17,13 @@ class Ship:
         self.rect.midbottom = self.screen_rect.midbottom
 
         # Movement flag; start with a ship that’s not moving.
+        self.moving_left = False
         self.moving_right = False
 
     def update(self):
-        """Update the ship’s position based on the movement flag."""
+        """Update the ship’s position based on the movement flags."""
+        if self.moving_left:
+            self.rect.x -= 1
         if self.moving_right:
             self.rect.x += 1
 
