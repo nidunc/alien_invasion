@@ -1,10 +1,15 @@
+from typing import TYPE_CHECKING
+
 import pygame
+
+if TYPE_CHECKING:
+    from alien_invasion import AlienInvasion
 
 
 class Ship:
     """A class to manage the ship."""
 
-    def __init__(self, ai_game) -> None:
+    def __init__(self, ai_game: "AlienInvasion") -> None:
         """Initialise the ship and set its starting position."""
         self.screen = ai_game.screen
         self.settings = ai_game.settings
@@ -33,7 +38,7 @@ class Ship:
             self.x += self.settings.ship_speed
 
         # Update rect object from self.x.
-        self.rect.x = self.x
+        self.rect.x = int(self.x)
 
     def blitme(self) -> None:
         """Draw the ship at its current location"""

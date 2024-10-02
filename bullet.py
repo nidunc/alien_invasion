@@ -1,11 +1,16 @@
+from typing import TYPE_CHECKING
+
 import pygame
 from pygame.sprite import Sprite
+
+if TYPE_CHECKING:
+    from alien_invasion import AlienInvasion
 
 
 class Bullet(Sprite):
     """A class to manage bullets fired from the ship."""
 
-    def __init__(self, ai_game) -> None:
+    def __init__(self, ai_game: "AlienInvasion") -> None:
         """Create a bullet object at the ship’s current position."""
         super().__init__()
         self.screen = ai_game.screen
@@ -26,7 +31,7 @@ class Bullet(Sprite):
         # Update the exact position of the bullet.
         self.y -= self.settings.bullet_speed
         # Update the rect position
-        self.rect.y = self.y
+        self.rect.y = int(self.y)
 
     def draw_bullet(self):
         """Draw the bullet to the screen."""
