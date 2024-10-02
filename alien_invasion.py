@@ -27,7 +27,9 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
-        self.bullets = pygame.sprite.Group()
+        # Tell Pylance that self.bullets is a collection of Bullet classes, while
+        # suppressing the reportInvalidTypeArguments error it would otherwise throw.
+        self.bullets: pygame.sprite.Group[Bullet] = pygame.sprite.Group()  # type: ignore
 
     def run_game(self) -> None:
         """Start the main loop for the game."""
