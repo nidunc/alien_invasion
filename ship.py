@@ -29,7 +29,7 @@ class Ship:
         self.moving_left = False
         self.moving_right = False
 
-    def update(self):
+    def update(self) -> None:
         """Update the ship’s position based on the movement flags."""
         # Update the ship’s rect value, not the rect itself.
         if self.moving_left and self.rect.left > 0:
