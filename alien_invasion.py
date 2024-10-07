@@ -113,22 +113,6 @@ class AlienInvasion:
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self._ship_hit()
 
-    def _ship_hit(self):
-        """Respond to the ship being hit by an alien."""
-        # Decrement ships left.
-        self.stats.ships_left -= 1
-
-        # Get rid of any remaining bullets and aliens.
-        self.bullets.empty()
-        self.aliens.empty()
-
-        # Create a new fleet and centre the ship.
-        self._create_fleet()
-        self.ship.center_ship()
-
-        # Pause.
-        sleep(0.5)
-
     def _create_fleet(self) -> None:
         """Create the fleet of aliens."""
         # Create an alien and keep adding aliens until there’s no room left.
@@ -166,6 +150,22 @@ class AlienInvasion:
         for alien in self.aliens.sprites():
             alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
+
+    def _ship_hit(self):
+        """Respond to the ship being hit by an alien."""
+        # Decrement ships left.
+        self.stats.ships_left -= 1
+
+        # Get rid of any remaining bullets and aliens.
+        self.bullets.empty()
+        self.aliens.empty()
+
+        # Create a new fleet and centre the ship.
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # Pause.
+        sleep(0.5)
 
     def _update_screen(self) -> None:
         """Update images on the screen, and flip to the new screen."""
