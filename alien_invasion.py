@@ -2,6 +2,7 @@ import sys
 
 import pygame
 
+from alien import Alien
 from bullet import Bullet
 from settings import Settings
 from ship import Ship
@@ -30,6 +31,9 @@ class AlienInvasion:
         # Tell Pylance that self.bullets is a collection of Bullet classes, while
         # suppressing the reportInvalidTypeArguments error it would otherwise throw.
         self.bullets: pygame.sprite.Group[Bullet] = pygame.sprite.Group()  # type: ignore
+        self.aliens: pygame.sprite.Group[Alien] = pygame.sprite.Group()  # type: ignore
+
+        self._create_fleet()
 
     def run_game(self) -> None:
         """Start the main loop for the game."""
@@ -84,12 +88,19 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+    def _create_fleet(self):
+        """Create the fleet of aliens."""
+        # Make an alien.
+        alien = Alien(self)
+        self.aliens.add(alien)
+
     def _update_screen(self) -> None:
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_colour)
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.ship.blitme()
+        self.aliens.draw(self.screen)
 
         pygame.display.flip()
 
