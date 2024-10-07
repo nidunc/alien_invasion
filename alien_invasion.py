@@ -88,7 +88,7 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
-    def _create_fleet(self):
+    def _create_fleet(self) -> None:
         """Create the fleet of aliens."""
         # Create an alien and keep adding aliens until there’s no room left.
         # Spacing between aliens is one alien width and one alien height.
@@ -105,7 +105,7 @@ class AlienInvasion:
             current_x = alien_width
             current_y += 2 * alien_width
 
-    def _create_alien(self, x_position, y_position):
+    def _create_alien(self, x_position, y_position) -> None:
         """Create an alien and place it in the fleet."""
         new_alien = Alien(self)
         new_alien.x = x_position

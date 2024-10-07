@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 class Alien(Sprite):
     """A class to represent a single alien in the fleet."""
 
-    def __init__(self, ai_game: "AlienInvasion"):
+    def __init__(self, ai_game: "AlienInvasion") -> None:
         """Initialise the alien and set its starting position."""
         super().__init__()
         self.screen = ai_game.screen
