@@ -1,9 +1,11 @@
 import sys
+from time import sleep
 
 import pygame
 
 from alien import Alien
 from bullet import Bullet
+from game_stats import GameStats
 from settings import Settings
 from ship import Ship
 
@@ -24,6 +26,9 @@ class AlienInvasion:
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
+
+        # Create an instance to store game statistics.
+        self.stats = GameStats(self)
 
         self.ship = Ship(self)
         # Tell Pylance that self.bullets is a collection of Bullet classes, while
@@ -106,7 +111,23 @@ class AlienInvasion:
 
         # Look for alien-ship collisions.
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print("Ship hit!!!")
+            self._ship_hit()
+
+    def _ship_hit(self):
+        """Respond to the ship being hit by an alien."""
+        # Decrement ships left.
+        self.stats.ships_left -= 1
+
+        # Get rid of any remaining bullets and aliens.
+        self.bullets.empty()
+        self.aliens.empty()
+
+        # Create a new fleet and centre the ship.
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # Pause.
+        sleep(0.5)
 
     def _create_fleet(self) -> None:
         """Create the fleet of aliens."""
