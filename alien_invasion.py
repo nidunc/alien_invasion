@@ -31,7 +31,7 @@ class AlienInvasion:
         # Tell Pylance that self.bullets is a collection of Bullet classes, while
         # suppressing the reportInvalidTypeArguments error it would otherwise throw.
         self.bullets: pygame.sprite.Group[Bullet] = pygame.sprite.Group()  # type: ignore
-        self.aliens = pygame.sprite.Group()
+        self.aliens: pygame.sprite.Group[Alien] = pygame.sprite.Group()  # type: ignore
 
         self._create_fleet()
 
