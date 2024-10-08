@@ -1,13 +1,18 @@
+from typing import TYPE_CHECKING
+
 import pygame.font
 from pygame.sprite import Group
 
 from ship import Ship
 
+if TYPE_CHECKING:
+    from alien_invasion import AlienInvasion
+
 
 class Scoreboard:
     """A class to report scoring information."""
 
-    def __init__(self, ai_game):
+    def __init__(self, ai_game: "AlienInvasion"):
         """Initialise scorekeeping attributes."""
         self.ai_game = ai_game
         self.screen = ai_game.screen
@@ -65,7 +70,7 @@ class Scoreboard:
 
     def prep_ships(self):
         """Show how many ships are left."""
-        self.ships = Group()
+        self.ships: Group[Ship] = Group()  # type: ignore
         for ship_number in range(self.stats.ships_left):
             ship = Ship(self.ai_game)
             ship.rect.x = 10 + ship_number * ship.rect.width

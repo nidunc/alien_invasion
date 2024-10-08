@@ -32,7 +32,7 @@ class Ship(Sprite):
         self.moving_left = False
         self.moving_right = False
 
-    def centre_ship(self):
+    def centre_ship(self) -> None:
         """Centre the ship on the screen."""
         self.rect.midbottom = self.screen_rect.midbottom
         self.x = float(self.rect.x)

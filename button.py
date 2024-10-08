@@ -1,10 +1,15 @@
+from typing import TYPE_CHECKING
+
 import pygame.font
+
+if TYPE_CHECKING:
+    from alien_invasion import AlienInvasion
 
 
 class Button:
     """A class to build buttons for the game."""
 
-    def __init__(self, ai_game, msg) -> None:
+    def __init__(self, ai_game: "AlienInvasion", msg: str) -> None:
         """Initialise button attributes."""
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
@@ -22,7 +27,7 @@ class Button:
         # The button message needs to be prepped only once.
         self._prep_msg(msg)
 
-    def _prep_msg(self, msg) -> None:
+    def _prep_msg(self, msg: str) -> None:
         """Turn msg into a rendered image and centre text on the button."""
         self.msg_image = self.font.render(
             msg, True, self.text_colour, self.button_colour
