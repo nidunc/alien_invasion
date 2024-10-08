@@ -27,7 +27,7 @@ class Settings:
 
         self.initialise_dynamic_settings()
 
-    def initialise_dynamic_settings(self):
+    def initialise_dynamic_settings(self) -> None:
         """Initialise settings that change throughout the game."""
         self.ship_speed = 1.5
         self.bullet_speed = 2.5
@@ -36,7 +36,7 @@ class Settings:
         # fleet_direction of 1 represents right; -1 represents left.
         self.fleet_direction = 1
 
-    def increase_speed(self):
+    def increase_speed(self) -> None:
         """Increase speed settings."""
         self.ship_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
