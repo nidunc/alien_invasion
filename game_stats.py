@@ -1,3 +1,5 @@
+import json
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -13,7 +15,22 @@ class GameStats:
         self.reset_stats()
 
         # High score should never be reset.
-        self.high_score = 0
+        self.path = Path("extra/high_score.json")
+        self.high_score = self.get_stored_highscore()
+
+    def get_stored_highscore(self) -> int:
+        """Get stored highscore if available."""
+        if self.path.exists():
+            contents = self.path.read_text()
+            highscore = int(json.loads(contents))
+            return highscore
+        else:
+            return 0
+
+    def store_highscore(self):
+        """Store the highscore."""
+        contents = json.dumps(self.high_score)
+        self.path.write_text(contents)
 
     def reset_stats(self) -> None:
         """Initialise statistics that can change during the game."""
